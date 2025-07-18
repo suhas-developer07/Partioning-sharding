@@ -2,7 +2,9 @@ package main
 
 import (
 	"log"
+	"net/http"
 
+	routes "github.com/suhas-developer07/Partioning-sharding/Routes"
 	"github.com/suhas-developer07/Partioning-sharding/db"
 	"github.com/suhas-developer07/Partioning-sharding/repository"
 )
@@ -23,5 +25,8 @@ func main(){
 		log.Fatalln("shard2 init failed:", err)
 	}
 
+	router := routes.MountRoutes()
+
+	http.ListenAndServe(":8080",router)
 }
 
